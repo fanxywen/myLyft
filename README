@@ -1,4 +1,13 @@
 This is a ride-sharing web app developed on Django
 
+Realized features:
+1. user sign up&login&logout
+2. user make a ride, search a ride, join a shared ride
+3. register as a driver
+4. driver edit vehicle info
+5. driver search for rides, confirm a ride, complete a ride
+6. user edit ride info
+7. confirmation email when a ride is confirmed by a driver
+
 To start, run python manage.py runserver
 

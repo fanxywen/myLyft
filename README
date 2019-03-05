@@ -1,0 +1,4 @@
+This is a ride-sharing web app developed on Django
+
+To start, run python manage.py runserver
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <title>Driver Homepage</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'myLift_app/driverPage.css' %}">
+</head>
+<body>
+  <h1> Welcome to RideShare! </h1>
+  <p class = "hi">Hi {{ user.username }}!</p>
+    {% if driver %}
+  <div class = "nav">
+      <a class = "active" href = "{% url 'driverPage' %}">Driver Page</a>
+      <a href="{% url 'driverEdit' %}" >Edit Vehicle Info</a>
+      <a href="{% url 'driverRideSearch' %}" >Search for a ride</a>
+      <a href="{% url 'showConfirmedRides' %}" >Your Confirmed Rides</a>
+      <a href="{% url 'showConfirmedOngoingRides'%}" >Your Ongoing Rides</a>
+      <a href="{% url 'home' %}" >Return Home</a>
+</div>
+    {% else %}
+  <div class = "regi">
+    <a href="{% url 'driverRegister' %}">Register as a driver</a>
+  </div>
+    {% endif%}
+<img class = "inhome "src = "{% static 'myLift_app/images/icon.gif' %}" height = "100" width = "100" >
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>

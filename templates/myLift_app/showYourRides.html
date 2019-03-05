@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'myLift_app/showYourRides.css' %}">
+    <title>All your rides</title>
+<h1>These are your rides </h1>
+</head>
+<body>
+  <div class = "return">
+      <a href="{% url 'home' %}">return</a>
+  </div>
+  <h2>Your ongoing rides</h2>
+  {% for ride in rides %}
+  <p>
+      {% if not ride.confirmedOrNot%}
+      <form action="{% url 'editRides' ride.id %}" method="POST">
+        <table>
+          {% for field, value in ride%}
+          <tr><th>{{field}}:</th>
+             <td>{{value}}</td></tr>
+          {% csrf_token %}
+          {% endfor %}
+        </table>
+          <button type="submit" name="edit">Edit</button>
+          <button type="submit" name="delete">Delete</button>
+      </form>
+      {% else %}
+        {%if ride.confirmedOrNot and not ride.completeOrNot%}
+        <form action="{% url 'editRides' ride.id %}" method="POST">
+          <table>
+            {% for field, value in ride%}
+            <tr><th>{{field}}:</th>
+               <td>{{value}}</td></tr>
+            {% csrf_token %}
+            {% endfor %}
+          </table>
+            <button type="submit" name="edit">Edit</button>
+            <button type="submit" name="delete">Delete</button>
+        </form>
+        {% endif%}
+        {%endif%}
+  </p>
+  {% endfor%}
+  <h2>Your completed rides</h2>
+
+    {% for ride in rides %}
+    <p>
+
+          {% if ride.confirmedOrNot and ride.completeOrNot%}
+        <form action="{% url 'editRides' ride.id %}" method="POST">
+          <table>
+            {% for field, value in ride%}
+            <tr><th>{{field}}:</th>
+               <td>{{value}}</td></tr>
+            {% csrf_token %}
+            {% endfor %}
+          </table>
+           {% if not ride.completeOrNot%}
+            <button type="submit" name="edit">Edit</button>
+            {% endif %}
+            <button type="submit" name="delete">Delete</button>
+        </form>
+        {% endif %}
+    </p>
+
+    {% endfor%}
+    <h2>Your ongoing share rides</h2>
+    {% for shareride in sharerides %}
+    <p>
+      {% if not shareride.confirmedOrNot%}
+        <form action="{% url 'editShareRides' shareride.id %}" method="get">
+        <table>
+            {% for field, value in shareride%}
+              {% csrf_token %}
+            <tr><th>{{field}}</th>
+              <td>{{value}}</td></tr>
+            {% endfor %}
+        </table>
+          {% if not ride.completeOrNot%}
+            <input type="submit" name="" value="edit">
+            {% endif %}
+        </form>
+        {%else%}
+        {% if shareride.confirmedOrNot and not shareride.completeOrNot%}
+        <form action="{% url 'editShareRides' shareride.id %}" method="get">
+        <table>
+            {% for field, value in shareride%}
+              {% csrf_token %}
+            <tr><th>{{field}}</th>
+              <td>{{value}}</td></tr>
+            {% endfor %}
+        </table>
+          {% if not ride.completeOrNot%}
+            <input type="submit" name="" value="edit">
+            {% endif %}
+            {%endif%}
+            {%endif%}
+    </p>
+    {% endfor%}
+    <h2>Your completed share rides</h2>
+    {% for shareride in sharerides %}
+    <p>
+
+          {% if shareride.confirmedOrNot and shareride.completeOrNot%}
+        <form action="{% url 'editShareRides' shareride.id %}" method="get">
+        <table>
+
+            {% for field, value in shareride%}
+              {% csrf_token %}
+            <tr><th>{{field}}</th>
+              <td>{{value}}</td></tr>
+            {% endfor %}
+        </table>
+        </form>
+        {% endif %}
+    </p>
+    {% endfor%}
+
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'myLift_app/login.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Login</title>
+    <h1> Welcome to RideShare!</h1>
+    <h2>Login</h2>
+</head>
+<body>
+  <div class = "return">
+      <a href="{% url 'home' %}">return</a>
+  </div>
+    <form method="post">
+      {% csrf_token %}
+      {{form.as_table}}
+      <button class = "submit" type="submit">Login</button>
+    </form>
+</body>
+</html>

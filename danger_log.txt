@@ -1,0 +1,16 @@
+01.23: when creating a ride, if the user input an invalid datetime, the app will take it as a valid input
+
+01.24: fixed by using django datetimefield method
+
+01.25: share ride may delete original ride
+
+01.26: 01.25's risk can be fixed by separating the share ride and original ride into two models
+
+01.27 We find that when mulitple sharers add in one share ride, number of total passengers went wrong.
+
+01.28 We find that when driver confirmed a ride, ride creater cannot view the status update.
+
+01.29 We find that when driver confimed a share ride, sharers cannot view the status update.
+
+01.30 We find that when a ride is completed, riders can still modify ride detail.
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'myLift_app/showYourRides.css' %}">
+    <title>All your confirmed ride orders</title>
+</head>
+<body>
+  <div class = "return">
+      <a href="{% url 'driverPage' %}">Return</a>
+  </div>
+    {% if rides%}
+        <h2>your confirmed ride order</h2>
+        {% for ride in rides %}
+            <table>
+                {% for field, value in ride%}
+                <tr><th>{{field}}:</th>
+                   <td>{{value}}</td></tr>
+                {% csrf_token %}
+                {% endfor %}
+            </table>
+        {% endfor%}
+    {% else%}
+        <h2>You have no confirmed ride order</h2>
+    {% endif%}
+
+
+
+</body>
+</html>

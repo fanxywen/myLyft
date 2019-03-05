@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <title>Edit User Information</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'myLift_app/editRide.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   <h1>Welcome to RideShare</h1>
+   <h2> Edit User Info</h2>
+</head>
+<body>
+    {% if messages %}
+    <div class = 'row'>
+    <div class = 'col-sm-6 col-sm-offset-3'>
+                {% for message in messages %}
+ {% if message.tags == "error" %}<p class = "alert alert-danger alert-dismissible fade show" role = "alert"> <a href = "#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}</p>{% endif%}
+                {% endfor %}
+
+</div>
+</div>
+    {% endif %}
+    {%if form.errors%}
+    <p class = "alert alert-danger alert-dismissible fade show" role = "alert"> <a href = "#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{form.errors}}</p>
+    {% endif %}
+<div class = 'container'>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+        {% for field in form.visible_fields %}
+          <tr>
+            <th>{{ field.label_tag }}</th>
+            <td>
+              {{ field }}
+            </td>
+          </tr>
+        {% endfor %}
+        </table>
+        <button type="submit" name="edit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

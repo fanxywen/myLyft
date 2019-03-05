@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'myLift_app/shareRide.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Share a Ride</title>
+    <h1> Welcome to RideShare! </h1>
+    <h2>Fill out the form</h2>
+</head>
+<body>
+
+    <div class = "return">
+        <a href="{% url 'home' %}">return</a>
+    </div>
+    <div class = "message">
+    {% if messages %}
+    <div class = 'row'>
+    <div class = 'col-sm-6 col-sm-offset-3'>
+                {% for message in messages %}
+  {% if message.tags == "success" %} <p class="alert alert-success alert-dismissilbe fade show"><a href = "#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}</p>{% endif %}
+ {% if message.tags == "error" %}<p class = "alert alert-danger alert-dismissible fade show" role = "alert"><a href = "#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}  Example Date format: 2006-10-25 14:30:00</p>{% endif%}
+                {% endfor %}
+</div>
+</div>
+        {% endif %}
+    </div>
+    <div class="container">
+        <form  method="POST">
+            {% csrf_token %}
+            <table>
+              {% for field in form.visible_fields %}
+                <tr>
+                  <th>{{ field.label_tag }}</th>
+                  <td>
+                    {{ field }}
+                    {{ field.help_text }}
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+            <input class = "submit" type="submit" name="">
+        </form>
+
+
+    </div>
+</body>
+</html>

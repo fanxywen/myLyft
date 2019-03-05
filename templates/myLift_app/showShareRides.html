@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'myLift_app/showShareRide.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Show Available Share Rides</title>
+    <h2>All available share rides</h2>
+</head>
+<div class = "return">
+    <a href="{% url 'home' %}">return</a>
+</div>
+<body>
+    {% if not rides %}
+    <p class="alert alert-danger" role = "alert">No ride available to share</p>
+    {% endif %}
+    <form action="{% url 'addShareRides' shareride.id %}" method="POST">
+    {% for ride in rides %}
+
+      <table>
+            {% for field, value in ride%}
+            <tr><th>{{field}}</th>
+              <td>{{value}}</td></tr>
+            {% csrf_token %}
+            {% endfor %}
+            <input type="radio" name="ride" value="{{ride.id}}">
+  </table>
+
+    {% endfor%}
+
+
+    <input type="submit" value="Join">
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Driver Edit a Ride</title>
+    <link rel= stylesheet href= https //maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css>
+</head>
+<body>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            <li>{{ form.errors }}</li>
+            <li>Date format: 2006-10-25 14:30:00</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h1>Fill out the form</h1>
+    <div class="container">
+        <form method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" name="">
+        </form>
+
+
+    </div>
+    <button onclick = "location.href='{% url 'showConfirmedOngoingRides' %}'" type="button">return</button>
+</body>
+</html>

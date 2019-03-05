@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'myLift_app/showYourRides.css' %}">
+
+    <title>All your confirmed ongoing ride orders</title>
+</head>
+<body>
+  <div class = "return">
+      <a href="{% url 'driverPage' %}">Return</a>
+  </div>
+  {% if not rides.completeOrNot%}
+      <h2>your confirmed ongoing ride order</h2>
+      {% for ride in rides %}
+
+
+          <form action="{% url 'completeRides' ride.id %}" method="POST">
+               <table>
+              {% for field, value in ride%}
+              <tr><th>{{field}}:</th>
+                 <td>{{value}}</td></tr>
+              {% csrf_token %}
+              {% endfor %}
+              </table>
+              <button type="submit" name="completed">complete</button>
+          </form>
+
+      {% endfor%}
+  {% else%}
+      <h2>You have no confirmed ongoing ride order</h2>
+  {% endif%}
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'myLift_app/signup.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+  <div class = "return">
+      <a href="{% url 'home' %}">return</a>
+  </div>
+  <div class = "text">
+    {% if messages %}
+    <div class = 'row'>
+    <div class = 'col-sm-6 col-sm-offset-3'>
+                {% for message in messages %}
+  {% if message.tags == "success" %} <p class="alert alert-success alert-dismissible fade show" role = "alert"> <a href = "#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}</p>{% endif %}
+ {% if message.tags == "error" %}<p class = "alert alert-danger alert-dismissible fade show" role = "alert"> <a href = "#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}  Example Date format: 2006-10-25 14:30:00</p>{% endif%}
+                {% endfor %}
+</div>
+</div>
+        {% endif %}
+</div>
+    <h1>Create account - @ RideShare APP</h1>
+  </div>
+  {% block javascript%}
+  {% endblock %}
+         <form method="post" >
+             {% csrf_token %}
+             <table>
+                {{ form.as_table }}
+             </table>
+             <input type="submit" name="submit" value="Register" />
+         </form>
+     </div>
+</body>
+</html>
